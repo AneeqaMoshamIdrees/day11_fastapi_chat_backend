@@ -29,7 +29,7 @@ from services.session_manager import (
 # import generate_reply function from gemini_service
 
 from services.gemini_service import generate_reply
-
+from routes.title_routes import router as title_router
 
 
 app = FastAPI(
@@ -37,6 +37,8 @@ app = FastAPI(
     description="Day 11 FastAPI Chat Server",
     version="1.0.0"
 )
+
+app.include_router(title_router)
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -133,7 +135,8 @@ def sessions():
 
             "session_id": session_id,
 
-            "messages": len(history)
+            "messages": len(history),
+            "history": history
 
         })
 
